@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bld.applets.mapper.AppletsUserMapper">
+    
+    <resultMap type="AppletsUser" id="AppletsUserResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="phone"    column="phone"    />
+        <result property="level"    column="level"    />
+        <result property="owner"    column="owner"    />
+        <result property="integral"    column="integral"    />
+        <result property="balance"    column="balance"    />
+        <result property="photo"    column="photo"    />
+        <result property="code"    column="code"    />
+    </resultMap>
+
+    <sql id="selectAppletsUserVo">
+        select id, name, phone, level, owner, integral, balance, photo, code from applets_user
+    </sql>
+
+    <select id="selectAppletsUserList" parameterType="AppletsUser" resultMap="AppletsUserResult">
+        <include refid="selectAppletsUserVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="level != null "> and level = #{level}</if>
+            <if test="owner != null "> and owner = #{owner}</if>
+            <if test="integral != null "> and integral = #{integral}</if>
+            <if test="balance != null  and balance != ''"> and balance = #{balance}</if>
+            <if test="photo != null  and photo != ''"> and photo = #{photo}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+        </where>
+    </select>
+    
+    <select id="selectAppletsUserById" parameterType="Long" resultMap="AppletsUserResult">
+        <include refid="selectAppletsUserVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAppletsUser" parameterType="AppletsUser">
+        insert into applets_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="phone != null">phone,</if>
+            <if test="level != null">level,</if>
+            <if test="owner != null">owner,</if>
+            <if test="integral != null">integral,</if>
+            <if test="balance != null">balance,</if>
+            <if test="photo != null">photo,</if>
+            <if test="code != null">code,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="level != null">#{level},</if>
+            <if test="owner != null">#{owner},</if>
+            <if test="integral != null">#{integral},</if>
+            <if test="balance != null">#{balance},</if>
+            <if test="photo != null">#{photo},</if>
+            <if test="code != null">#{code},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAppletsUser" parameterType="AppletsUser">
+        update applets_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="level != null">level = #{level},</if>
+            <if test="owner != null">owner = #{owner},</if>
+            <if test="integral != null">integral = #{integral},</if>
+            <if test="balance != null">balance = #{balance},</if>
+            <if test="photo != null">photo = #{photo},</if>
+            <if test="code != null">code = #{code},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAppletsUserById" parameterType="Long">
+        delete from applets_user where id = #{id}
+    </delete>
+
+    <delete id="deleteAppletsUserByIds" parameterType="String">
+        delete from applets_user where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

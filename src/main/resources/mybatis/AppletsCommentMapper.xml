@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bld.applets.mapper.AppletsCommentMapper">
+    
+    <resultMap type="AppletsComment" id="AppletsCommentResult">
+        <result property="id"    column="id"    />
+        <result property="content"    column="content"    />
+        <result property="time"    column="time"    />
+        <result property="level"    column="level"    />
+        <result property="tag"    column="tag"    />
+        <result property="userId"    column="user_id"    />
+        <result property="pilesId"    column="piles_id"    />
+    </resultMap>
+
+    <sql id="selectAppletsCommentVo">
+        select id, content, time, level, tag, user_id, piles_id from applets_comment
+    </sql>
+
+    <select id="selectAppletsCommentList" parameterType="AppletsComment" resultMap="AppletsCommentResult">
+        <include refid="selectAppletsCommentVo"/>
+        <where>  
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="level != null "> and level = #{level}</if>
+            <if test="tag != null  and tag != ''"> and tag = #{tag}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="pilesId != null "> and piles_id = #{pilesId}</if>
+        </where>
+    </select>
+    
+    <select id="selectAppletsCommentById" parameterType="Long" resultMap="AppletsCommentResult">
+        <include refid="selectAppletsCommentVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAppletsComment" parameterType="AppletsComment" useGeneratedKeys="true" keyProperty="id">
+        insert into applets_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="content != null">content,</if>
+            <if test="time != null">time,</if>
+            <if test="level != null">level,</if>
+            <if test="tag != null">tag,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="pilesId != null">piles_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="content != null">#{content},</if>
+            <if test="time != null">#{time},</if>
+            <if test="level != null">#{level},</if>
+            <if test="tag != null">#{tag},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="pilesId != null">#{pilesId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAppletsComment" parameterType="AppletsComment">
+        update applets_comment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="content != null">content = #{content},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="level != null">level = #{level},</if>
+            <if test="tag != null">tag = #{tag},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="pilesId != null">piles_id = #{pilesId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAppletsCommentById" parameterType="Long">
+        delete from applets_comment where id = #{id}
+    </delete>
+
+    <delete id="deleteAppletsCommentByIds" parameterType="String">
+        delete from applets_comment where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
