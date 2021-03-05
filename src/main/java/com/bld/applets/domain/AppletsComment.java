@@ -45,6 +45,8 @@ public class AppletsComment extends BaseEntity
     @Excel(name = "充电桩id")
     private Long pilesId;
 
+    private AppletsPiles piles;
+
     public AppletsComment setId(Long id)
     {
         this.id = id;
@@ -114,6 +116,15 @@ public class AppletsComment extends BaseEntity
     public Long getPilesId() 
     {
         return pilesId;
+    }
+
+    public AppletsPiles getPiles() {
+        return piles;
+    }
+
+    public AppletsComment setPiles(AppletsPiles piles) {
+        this.piles = piles;
+        return this;
     }
 
     @Override

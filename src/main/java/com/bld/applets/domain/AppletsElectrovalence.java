@@ -46,6 +46,8 @@ public class AppletsElectrovalence extends BaseEntity
     @Excel(name = "用户id")
     private Long userId;
 
+    private AppletsPiles piles;
+
     public AppletsElectrovalence setId(Long id)
     {
         this.id = id;
@@ -125,6 +127,15 @@ public class AppletsElectrovalence extends BaseEntity
     public Long getUserId() 
     {
         return userId;
+    }
+
+    public AppletsPiles getPiles() {
+        return piles;
+    }
+
+    public AppletsElectrovalence setPiles(AppletsPiles piles) {
+        this.piles = piles;
+        return this;
     }
 
     @Override

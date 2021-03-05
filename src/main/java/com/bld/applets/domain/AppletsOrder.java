@@ -63,6 +63,8 @@ public class AppletsOrder extends BaseEntity
     @Excel(name = "积分")
     private Long integral;
 
+    private AppletsPiles piles;
+
     public AppletsOrder setId(Long id)
     {
         this.id = id;
@@ -172,6 +174,15 @@ public class AppletsOrder extends BaseEntity
     public Long getIntegral() 
     {
         return integral;
+    }
+
+    public AppletsPiles getPiles() {
+        return piles;
+    }
+
+    public AppletsOrder setPiles(AppletsPiles piles) {
+        this.piles = piles;
+        return this;
     }
 
     @Override

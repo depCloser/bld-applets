@@ -1,11 +1,13 @@
 package com.bld.applets.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import com.bld.applets.domain.AppletsPiles;
+import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,12 +17,9 @@ import com.bld.applets.domain.AppletsElectrovalence;
 import com.bld.applets.service.IAppletsElectrovalenceService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 充电桩电价Controller
- * 
  * @author tyx
  * @date 2021-03-03
  */
@@ -37,24 +36,11 @@ public class AppletsElectrovalenceController extends BaseController
      */
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(AppletsElectrovalence appletsElectrovalence)
+    public Map list(AppletsElectrovalence appletsElectrovalence)
     {
-        startPage();
-        List<AppletsElectrovalence> list = appletsElectrovalenceService.selectAppletsElectrovalenceList(appletsElectrovalence);
-        return getDataTable(list);
-    }
-
-    /**
-     * 导出充电桩电价列表
-     */
-    @Log(title = "充电桩电价", businessType = BusinessType.EXPORT)
-    @PostMapping("/export")
-    @ResponseBody
-    public AjaxResult export(AppletsElectrovalence appletsElectrovalence)
-    {
-        List<AppletsElectrovalence> list = appletsElectrovalenceService.selectAppletsElectrovalenceList(appletsElectrovalence);
-        ExcelUtil<AppletsElectrovalence> util = new ExcelUtil<AppletsElectrovalence>(AppletsElectrovalence.class);
-        return util.exportExcel(list, "electrovalence");
+        List<AppletsElectrovalence> list = appletsElectrovalenceService.selectAppletsElectrovalenceList(appletsElectrovalence.setUserId(CommonUtils.getUserId()));
+        Map<AppletsPiles, List<AppletsElectrovalence>> result = list.stream().collect(Collectors.groupingBy(AppletsElectrovalence::getPiles));
+        return result;
     }
 
     /**
@@ -65,7 +51,7 @@ public class AppletsElectrovalenceController extends BaseController
     @ResponseBody
     public AjaxResult addSave(AppletsElectrovalence appletsElectrovalence)
     {
-        return toAjax(appletsElectrovalenceService.insertAppletsElectrovalence(appletsElectrovalence));
+        return toAjax(appletsElectrovalenceService.insertAppletsElectrovalence(appletsElectrovalence.setUserId(CommonUtils.getUserId())));
     }
 
     /**

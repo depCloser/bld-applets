@@ -2,6 +2,7 @@ package com.bld.applets.mapper;
 
 import java.util.List;
 import com.bld.applets.domain.AppletsUser;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 用户Mapper接口
@@ -58,4 +59,15 @@ public interface AppletsUserMapper
      * @return 结果
      */
     public int deleteAppletsUserByIds(String[] ids);
+
+    /*
+     * @Author: tyx
+     * @Description: 查询月度充电量  
+     * @Param: []
+     * @return: java.lang.Long
+     * @Date: 2021/3/4
+     */
+    @Select("SELECT SUM(charge) FROM applets_order where status != 0 and date = CURDATE()")
+    public Long getThisMonthCharge ();
+
 }

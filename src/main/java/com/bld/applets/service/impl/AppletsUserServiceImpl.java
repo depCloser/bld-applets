@@ -91,4 +91,10 @@ public class AppletsUserServiceImpl implements IAppletsUserService
     {
         return appletsUserMapper.deleteAppletsUserById(id);
     }
+
+    @Override
+    public Long getThisMonthCharge() {
+        return appletsUserMapper.getThisMonthCharge();
+    }
+
 }

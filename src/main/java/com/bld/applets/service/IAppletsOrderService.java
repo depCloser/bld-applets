@@ -13,7 +13,7 @@ public interface IAppletsOrderService
 {
     /**
      * 查询订单
-     * 
+     *
      * @param id 订单ID
      * @return 订单
      */
@@ -58,4 +58,5 @@ public interface IAppletsOrderService
      * @return 结果
      */
     public int deleteAppletsOrderById(Long id);
+
 }

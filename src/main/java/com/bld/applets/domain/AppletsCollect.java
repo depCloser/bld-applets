@@ -26,6 +26,8 @@ public class AppletsCollect extends BaseEntity
     @Excel(name = "充电桩id")
     private Long pilesId;
 
+    private AppletsPiles piles;
+
     public AppletsCollect setId(Long id)
     {
         this.id = id;
@@ -55,6 +57,15 @@ public class AppletsCollect extends BaseEntity
     public Long getPilesId() 
     {
         return pilesId;
+    }
+
+    public AppletsPiles getPiles() {
+        return piles;
+    }
+
+    public AppletsCollect setPiles(AppletsPiles piles) {
+        this.piles = piles;
+        return this;
     }
 
     @Override

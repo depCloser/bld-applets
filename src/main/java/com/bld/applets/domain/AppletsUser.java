@@ -50,6 +50,10 @@ public class AppletsUser extends BaseEntity
     @Excel(name = "注册标识码")
     private String code;
 
+    private Long monthCharge;
+
+    private Long memberDifference;
+
     public AppletsUser setId(Long id)
     {
         this.id = id;
@@ -139,6 +143,24 @@ public class AppletsUser extends BaseEntity
     public String getCode() 
     {
         return code;
+    }
+
+    public Long getMonthCharge() {
+        return monthCharge;
+    }
+
+    public AppletsUser setMonthCharge(Long monthCharge) {
+        this.monthCharge = monthCharge;
+        return this;
+    }
+
+    public Long getMemberDifference() {
+        return memberDifference;
+    }
+
+    public AppletsUser setMemberDifference(Long memberDifference) {
+        this.memberDifference = memberDifference;
+        return this;
     }
 
     @Override

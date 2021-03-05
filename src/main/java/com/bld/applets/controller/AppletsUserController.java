@@ -1,11 +1,10 @@
 package com.bld.applets.controller;
 
-import java.util.List;
+import com.bld.applets.service.IAppletsConfigService;
+import com.bld.applets.service.IAppletsOrderService;
+import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,8 +14,6 @@ import com.bld.applets.domain.AppletsUser;
 import com.bld.applets.service.IAppletsUserService;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 用户Controller
@@ -32,29 +29,27 @@ public class AppletsUserController extends BaseController
     @Autowired
     private IAppletsUserService appletsUserService;
 
-    /**
-     * 查询用户列表
-     */
-    @PostMapping("/list")
-    @ResponseBody
-    public TableDataInfo list(AppletsUser appletsUser)
-    {
-        startPage();
-        List<AppletsUser> list = appletsUserService.selectAppletsUserList(appletsUser);
-        return getDataTable(list);
-    }
+    @Autowired
+    private IAppletsOrderService orderService;
+
+    @Autowired
+    private IAppletsConfigService configService;
 
     /**
-     * 导出用户列表
+     * 查询用户列表
+     *
      */
-    @Log(title = "用户", businessType = BusinessType.EXPORT)
-    @PostMapping("/export")
+    @PostMapping("/get")
     @ResponseBody
-    public AjaxResult export(AppletsUser appletsUser)
+    public AppletsUser get()
     {
-        List<AppletsUser> list = appletsUserService.selectAppletsUserList(appletsUser);
-        ExcelUtil<AppletsUser> util = new ExcelUtil<AppletsUser>(AppletsUser.class);
-        return util.exportExcel(list, "user");
+        AppletsUser user = CommonUtils.getUser();
+        // 查询本月充电量
+        Long thisMonthCharge = appletsUserService.getThisMonthCharge();
+        // 计算会员等级差
+        Long memberDifference = CommonUtils.getMemberDifference();
+        user.setMemberDifference(memberDifference).setMonthCharge(thisMonthCharge);
+        return CommonUtils.getUser();
     }
 
     /**
@@ -76,6 +71,7 @@ public class AppletsUserController extends BaseController
     @ResponseBody
     public AjaxResult editSave(AppletsUser appletsUser)
     {
+        AppletsUser user = CommonUtils.getUser();
         return toAjax(appletsUserService.updateAppletsUser(appletsUser));
     }
 
@@ -89,4 +85,5 @@ public class AppletsUserController extends BaseController
     {
         return toAjax(appletsUserService.deleteAppletsUserByIds(ids));
     }
+
 }

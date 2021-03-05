@@ -58,4 +58,7 @@ public interface IAppletsUserService
      * @return 结果
      */
     public int deleteAppletsUserById(Long id);
+
+    public Long getThisMonthCharge ();
+
 }
