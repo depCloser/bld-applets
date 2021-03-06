@@ -1,12 +1,13 @@
 package com.bld.applets.service.impl;
 
 import java.util.List;
+
+import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bld.applets.mapper.AppletsElectrovalenceMapper;
 import com.bld.applets.domain.AppletsElectrovalence;
 import com.bld.applets.service.IAppletsElectrovalenceService;
-import com.ruoyi.common.core.text.Convert;
 
 /**
  * 充电桩电价Service业务层处理
@@ -77,7 +78,7 @@ public class AppletsElectrovalenceServiceImpl implements IAppletsElectrovalenceS
     @Override
     public int deleteAppletsElectrovalenceByIds(String ids)
     {
-        return appletsElectrovalenceMapper.deleteAppletsElectrovalenceByIds(Convert.toStrArray(ids));
+        return appletsElectrovalenceMapper.deleteAppletsElectrovalenceByIds(CommonUtils.toStrArray(ids));
     }
 
     /**

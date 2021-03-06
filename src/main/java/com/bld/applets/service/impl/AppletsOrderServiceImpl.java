@@ -1,13 +1,14 @@
 package com.bld.applets.service.impl;
 
+import java.util.Date;
 import java.util.List;
-import com.ruoyi.common.utils.DateUtils;
+
+import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bld.applets.mapper.AppletsOrderMapper;
 import com.bld.applets.domain.AppletsOrder;
 import com.bld.applets.service.IAppletsOrderService;
-import com.ruoyi.common.core.text.Convert;
 
 /**
  * 订单Service业务层处理
@@ -66,7 +67,7 @@ public class AppletsOrderServiceImpl implements IAppletsOrderService
     @Override
     public int updateAppletsOrder(AppletsOrder appletsOrder)
     {
-        appletsOrder.setUpdateTime(DateUtils.getNowDate());
+        appletsOrder.setUpdateTime(new Date());
         return appletsOrderMapper.updateAppletsOrder(appletsOrder);
     }
 
@@ -79,7 +80,7 @@ public class AppletsOrderServiceImpl implements IAppletsOrderService
     @Override
     public int deleteAppletsOrderByIds(String ids)
     {
-        return appletsOrderMapper.deleteAppletsOrderByIds(Convert.toStrArray(ids));
+        return appletsOrderMapper.deleteAppletsOrderByIds(CommonUtils.toStrArray(ids));
     }
 
     /**

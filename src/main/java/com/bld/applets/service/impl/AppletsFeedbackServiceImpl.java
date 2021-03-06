@@ -1,12 +1,13 @@
 package com.bld.applets.service.impl;
 
 import java.util.List;
+
+import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bld.applets.mapper.AppletsFeedbackMapper;
 import com.bld.applets.domain.AppletsFeedback;
 import com.bld.applets.service.IAppletsFeedbackService;
-import com.ruoyi.common.core.text.Convert;
 
 /**
  * 反馈Service业务层处理
@@ -77,7 +78,7 @@ public class AppletsFeedbackServiceImpl implements IAppletsFeedbackService
     @Override
     public int deleteAppletsFeedbackByIds(String ids)
     {
-        return appletsFeedbackMapper.deleteAppletsFeedbackByIds(Convert.toStrArray(ids));
+        return appletsFeedbackMapper.deleteAppletsFeedbackByIds(CommonUtils.toStrArray(ids));
     }
 
     /**

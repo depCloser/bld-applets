@@ -1,12 +1,13 @@
 package com.bld.applets.service.impl;
 
 import java.util.List;
+
+import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bld.applets.mapper.AppletsCarMapper;
 import com.bld.applets.domain.AppletsCar;
 import com.bld.applets.service.IAppletsCarService;
-import com.ruoyi.common.core.text.Convert;
 
 /**
  * 用户车辆Service业务层处理
@@ -77,7 +78,7 @@ public class AppletsCarServiceImpl implements IAppletsCarService
     @Override
     public int deleteAppletsCarByIds(String ids)
     {
-        return appletsCarMapper.deleteAppletsCarByIds(Convert.toStrArray(ids));
+        return appletsCarMapper.deleteAppletsCarByIds(CommonUtils.toStrArray(ids));
     }
 
     /**

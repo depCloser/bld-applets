@@ -1,12 +1,13 @@
 package com.bld.applets.service.impl;
 
 import java.util.List;
+
+import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bld.applets.mapper.AppletsCollectMapper;
 import com.bld.applets.domain.AppletsCollect;
 import com.bld.applets.service.IAppletsCollectService;
-import com.ruoyi.common.core.text.Convert;
 
 /**
  * 用户收藏（用户-充电桩关联，多对多）Service业务层处理
@@ -77,7 +78,7 @@ public class AppletsCollectServiceImpl implements IAppletsCollectService
     @Override
     public int deleteAppletsCollectByIds(String ids)
     {
-        return appletsCollectMapper.deleteAppletsCollectByIds(Convert.toStrArray(ids));
+        return appletsCollectMapper.deleteAppletsCollectByIds(CommonUtils.toStrArray(ids));
     }
 
     /**

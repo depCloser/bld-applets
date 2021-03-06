@@ -2,8 +2,6 @@ package com.bld.applets.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 用户对象 applets_user
@@ -19,35 +17,27 @@ public class AppletsUser extends BaseEntity
     private Long id;
 
     /** 名称 */
-    @Excel(name = "名称")
     private String name;
 
     /** 电话号码 */
-    @Excel(name = "电话号码")
     private String phone;
 
     /** 会员等级 */
-    @Excel(name = "会员等级")
     private Integer level;
 
     /** 是否拥有充电桩：1是、0否 */
-    @Excel(name = "是否拥有充电桩：1是、0否")
     private Integer owner;
 
     /** 积分 */
-    @Excel(name = "积分")
     private Long integral;
 
     /** 余额 */
-    @Excel(name = "余额")
     private String balance;
 
     /** 头像地址 */
-    @Excel(name = "头像地址")
     private String photo;
 
     /** 注册标识码 */
-    @Excel(name = "注册标识码")
     private String code;
 
     private Long monthCharge;

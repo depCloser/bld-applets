@@ -3,20 +3,17 @@ package com.bld.applets.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.bld.applets.domain.AjaxResult;
 import com.bld.applets.domain.AppletsPiles;
+import com.bld.applets.domain.TableDataInfo;
 import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
 import com.bld.applets.domain.AppletsCollect;
 import com.bld.applets.service.IAppletsCollectService;
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 用户收藏 Controller
@@ -47,7 +44,6 @@ public class AppletsCollectController extends BaseController
     /**
      * 新增保存用户收藏（用户-充电桩关联，多对多）
      */
-    @Log(title = "用户收藏（用户-充电桩关联，多对多）", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(AppletsCollect appletsCollect)
@@ -58,7 +54,6 @@ public class AppletsCollectController extends BaseController
     /**
      * 修改保存用户收藏（用户-充电桩关联，多对多）
      */
-    @Log(title = "用户收藏（用户-充电桩关联，多对多）", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(AppletsCollect appletsCollect)
@@ -69,7 +64,6 @@ public class AppletsCollectController extends BaseController
     /**
      * 删除用户收藏（用户-充电桩关联，多对多）
      */
-    @Log(title = "用户收藏（用户-充电桩关联，多对多）", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

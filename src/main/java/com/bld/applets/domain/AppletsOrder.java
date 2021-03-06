@@ -4,8 +4,6 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 订单对象 applets_order
@@ -21,46 +19,36 @@ public class AppletsOrder extends BaseEntity
     private Long id;
 
     /** 订单编号 */
-    @Excel(name = "订单编号")
     private String code;
 
     /** 订单状态：0待支付、1已支付、2已完成 */
-    @Excel(name = "订单状态：0待支付、1已支付、2已完成")
     private Integer status;
 
     /** 用户id */
-    @Excel(name = "用户id")
     private Long userId;
 
     /** 充电桩id */
-    @Excel(name = "充电桩id")
     private Long pilesId;
 
     /** 创建日期 */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "创建日期", width = 30, dateFormat = "yyyy-MM-dd")
     private Date date;
 
     /** 充电开始时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "充电开始时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date startTime;
 
     /** 充电结束时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "充电结束时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date endTime;
 
     /** 花费金额 */
-    @Excel(name = "花费金额")
     private String cost;
 
     /** 充电量 */
-    @Excel(name = "充电量")
     private Long charge;
 
     /** 积分 */
-    @Excel(name = "积分")
     private Long integral;
 
     private AppletsPiles piles;

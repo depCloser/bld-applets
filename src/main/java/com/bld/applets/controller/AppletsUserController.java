@@ -1,19 +1,15 @@
 package com.bld.applets.controller;
 
-import com.bld.applets.service.IAppletsConfigService;
-import com.bld.applets.service.IAppletsOrderService;
+import com.bld.applets.domain.AjaxResult;
 import com.bld.applets.utils.CommonUtils;
+import com.bld.applets.utils.ServiceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
 import com.bld.applets.domain.AppletsUser;
 import com.bld.applets.service.IAppletsUserService;
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
 
 /**
  * 用户Controller
@@ -29,12 +25,6 @@ public class AppletsUserController extends BaseController
     @Autowired
     private IAppletsUserService appletsUserService;
 
-    @Autowired
-    private IAppletsOrderService orderService;
-
-    @Autowired
-    private IAppletsConfigService configService;
-
     /**
      * 查询用户列表
      *
@@ -47,7 +37,7 @@ public class AppletsUserController extends BaseController
         // 查询本月充电量
         Long thisMonthCharge = appletsUserService.getThisMonthCharge();
         // 计算会员等级差
-        Long memberDifference = CommonUtils.getMemberDifference();
+        Long memberDifference = ServiceUtil.getMemberDifference();
         user.setMemberDifference(memberDifference).setMonthCharge(thisMonthCharge);
         return CommonUtils.getUser();
     }
@@ -55,7 +45,6 @@ public class AppletsUserController extends BaseController
     /**
      * 新增保存用户
      */
-    @Log(title = "用户", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(AppletsUser appletsUser)
@@ -66,7 +55,6 @@ public class AppletsUserController extends BaseController
     /**
      * 修改保存用户
      */
-    @Log(title = "用户", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(AppletsUser appletsUser)
@@ -78,7 +66,6 @@ public class AppletsUserController extends BaseController
     /**
      * 删除用户
      */
-    @Log(title = "用户", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

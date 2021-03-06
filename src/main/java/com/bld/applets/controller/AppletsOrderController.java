@@ -3,20 +3,17 @@ package com.bld.applets.controller;
 import java.util.Date;
 import java.util.List;
 
+import com.bld.applets.domain.AjaxResult;
+import com.bld.applets.domain.TableDataInfo;
 import com.bld.applets.utils.CommonUtils;
+import com.bld.applets.utils.ServiceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
 import com.bld.applets.domain.AppletsOrder;
 import com.bld.applets.service.IAppletsOrderService;
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.utils.poi.ExcelUtil;
-import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 订单Controller
@@ -44,27 +41,13 @@ public class AppletsOrderController extends BaseController
     }
 
     /**
-     * 导出订单列表
-     */
-    @Log(title = "订单", businessType = BusinessType.EXPORT)
-    @PostMapping("/export")
-    @ResponseBody
-    public AjaxResult export(AppletsOrder appletsOrder)
-    {
-        List<AppletsOrder> list = appletsOrderService.selectAppletsOrderList(appletsOrder);
-        ExcelUtil<AppletsOrder> util = new ExcelUtil<AppletsOrder>(AppletsOrder.class);
-        return util.exportExcel(list, "order");
-    }
-
-    /**
      * 新增保存订单
      */
-    @Log(title = "订单", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(AppletsOrder appletsOrder)
     {
-        appletsOrder.setCode(CommonUtils.generateOrderCode())
+        appletsOrder.setCode(ServiceUtil.generateOrderCode())
                 .setUserId(CommonUtils.getUserId())
                 .setDate(new Date())
                 .setStatus(0);
@@ -78,7 +61,6 @@ public class AppletsOrderController extends BaseController
      * @return: com.ruoyi.common.core.domain.AjaxResult
      * @Date: 2021/3/3
      */
-    @Log(title = "订单", businessType = BusinessType.INSERT)
     @PostMapping("/recharge")
     @ResponseBody
     public AjaxResult recharge(Long orderId, Integer type)
@@ -91,11 +73,11 @@ public class AppletsOrderController extends BaseController
             // 暂无计算公式
             appletsOrder.setEndTime(new Date())
                     // 计算费用
-                    .setCost(CommonUtils.getCost())
+                    .setCost(ServiceUtil.getCost())
                     // 计算积分
-                    .setIntegral(CommonUtils.getIntegral())
+                    .setIntegral(ServiceUtil.getIntegral())
                     // 计算充电量
-                    .setCharge(CommonUtils.getCharge());
+                    .setCharge(ServiceUtil.getCharge());
         }
         return toAjax(appletsOrderService.insertAppletsOrder(appletsOrder));
     }
@@ -103,7 +85,6 @@ public class AppletsOrderController extends BaseController
     /**
      * 修改保存订单
      */
-    @Log(title = "订单", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(AppletsOrder appletsOrder)
@@ -115,7 +96,6 @@ public class AppletsOrderController extends BaseController
     /**
      * 删除订单
      */
-    @Log(title = "订单", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

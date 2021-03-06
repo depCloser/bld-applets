@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bld.applets.mapper.AppletsConfigMapper">
+    
+    <resultMap type="AppletsConfig" id="AppletsConfigResult">
+        <result property="id"    column="id"    />
+        <result property="configName"    column="config_name"    />
+        <result property="configKey"    column="config_key"    />
+        <result property="configValue"    column="config_value"    />
+        <result property="owner"    column="owner"    />
+        <result property="createTime"    column="createTime"    />
+        <result property="updateTime"    column="updateTime"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectAppletsConfigVo">
+        select id, config_name, config_key, config_value, owner, createTime, updateTime, remark from applets_config
+    </sql>
+
+    <select id="selectAppletsConfigList" parameterType="AppletsConfig" resultMap="AppletsConfigResult">
+        <include refid="selectAppletsConfigVo"/>
+        <where>  
+            <if test="configName != null  and configName != ''"> and config_name like concat('%', #{configName}, '%')</if>
+            <if test="configKey != null  and configKey != ''"> and config_key = #{configKey}</if>
+            <if test="configValue != null  and configValue != ''"> and config_value = #{configValue}</if>
+            <if test="owner != null  and owner != ''"> and owner = #{owner}</if>
+            <if test="createTime != null "> and createTime = #{createTime}</if>
+            <if test="updateTime != null "> and updateTime = #{updateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectAppletsConfigById" parameterType="Long" resultMap="AppletsConfigResult">
+        <include refid="selectAppletsConfigVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAppletsConfig" parameterType="AppletsConfig" useGeneratedKeys="true" keyProperty="id">
+        insert into applets_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="configName != null">config_name,</if>
+            <if test="configKey != null">config_key,</if>
+            <if test="configValue != null">config_value,</if>
+            <if test="owner != null">owner,</if>
+            <if test="createTime != null">createTime,</if>
+            <if test="updateTime != null">updateTime,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="configName != null">#{configName},</if>
+            <if test="configKey != null">#{configKey},</if>
+            <if test="configValue != null">#{configValue},</if>
+            <if test="owner != null">#{owner},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAppletsConfig" parameterType="AppletsConfig">
+        update applets_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="configName != null">config_name = #{configName},</if>
+            <if test="configKey != null">config_key = #{configKey},</if>
+            <if test="configValue != null">config_value = #{configValue},</if>
+            <if test="owner != null">owner = #{owner},</if>
+            <if test="createTime != null">createTime = #{createTime},</if>
+            <if test="updateTime != null">updateTime = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAppletsConfigById" parameterType="Long">
+        delete from applets_config where id = #{id}
+    </delete>
+
+    <delete id="deleteAppletsConfigByIds" parameterType="String">
+        delete from applets_config where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

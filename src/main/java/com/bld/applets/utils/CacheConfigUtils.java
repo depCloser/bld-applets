@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @description: TODO
  * @date 2021/3/4 17:32
  */
-public class CacheUtils {
+public class CacheConfigUtils {
 
     private static final ConcurrentHashMap<String, String> cacheMap = new ConcurrentHashMap<>();
 

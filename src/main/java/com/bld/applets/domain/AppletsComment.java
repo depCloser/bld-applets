@@ -4,8 +4,6 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 评论对象 applets_comment
@@ -21,28 +19,22 @@ public class AppletsComment extends BaseEntity
     private Long id;
 
     /** 评论内容 */
-    @Excel(name = "评论内容")
     private String content;
 
     /** 评论时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "评论时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date time;
 
     /** 星级 */
-    @Excel(name = "星级")
     private Integer level;
 
     /** 标签 */
-    @Excel(name = "标签")
     private String tag;
 
     /** 用户id */
-    @Excel(name = "用户id")
     private Long userId;
 
     /** 充电桩id */
-    @Excel(name = "充电桩id")
     private Long pilesId;
 
     private AppletsPiles piles;

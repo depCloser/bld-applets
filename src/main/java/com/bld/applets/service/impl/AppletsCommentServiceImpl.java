@@ -1,12 +1,13 @@
 package com.bld.applets.service.impl;
 
 import java.util.List;
+
+import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bld.applets.mapper.AppletsCommentMapper;
 import com.bld.applets.domain.AppletsComment;
 import com.bld.applets.service.IAppletsCommentService;
-import com.ruoyi.common.core.text.Convert;
 
 /**
  * 评论Service业务层处理
@@ -77,7 +78,7 @@ public class AppletsCommentServiceImpl implements IAppletsCommentService
     @Override
     public int deleteAppletsCommentByIds(String ids)
     {
-        return appletsCommentMapper.deleteAppletsCommentByIds(Convert.toStrArray(ids));
+        return appletsCommentMapper.deleteAppletsCommentByIds(CommonUtils.toStrArray(ids));
     }
 
     /**

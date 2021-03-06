@@ -2,14 +2,12 @@ package com.bld.applets.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 小程序参数配置对象 applets_config
  * 
  * @author tyx
- * @date 2021-03-04
+ * @date 2021-03-06
  */
 public class AppletsConfig extends BaseEntity
 {
@@ -19,19 +17,15 @@ public class AppletsConfig extends BaseEntity
     private Long id;
 
     /** 参数名 */
-    @Excel(name = "参数名")
-    private String name;
+    private String configName;
 
     /** 键 */
-    @Excel(name = "键")
-    private String key;
+    private String configKey;
 
     /** 值 */
-    @Excel(name = "值")
-    private String value;
+    private String configValue;
 
     /** 创建者 */
-    @Excel(name = "创建者")
     private String owner;
 
     public AppletsConfig setId(Long id)
@@ -44,35 +38,35 @@ public class AppletsConfig extends BaseEntity
     {
         return id;
     }
-    public AppletsConfig setName(String name)
+    public AppletsConfig setConfigName(String configName)
     {
-        this.name = name;
+        this.configName = configName;
         return this;
     }
 
-    public String getName() 
+    public String getConfigName() 
     {
-        return name;
+        return configName;
     }
-    public AppletsConfig setKey(String key)
+    public AppletsConfig setConfigKey(String configKey)
     {
-        this.key = key;
+        this.configKey = configKey;
         return this;
     }
 
-    public String getKey() 
+    public String getConfigKey() 
     {
-        return key;
+        return configKey;
     }
-    public AppletsConfig setValue(String value)
+    public AppletsConfig setConfigValue(String configValue)
     {
-        this.value = value;
+        this.configValue = configValue;
         return this;
     }
 
-    public String getValue() 
+    public String getConfigValue() 
     {
-        return value;
+        return configValue;
     }
     public AppletsConfig setOwner(String owner)
     {
@@ -89,9 +83,9 @@ public class AppletsConfig extends BaseEntity
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
-            .append("name", getName())
-            .append("key", getKey())
-            .append("value", getValue())
+            .append("configName", getConfigName())
+            .append("configKey", getConfigKey())
+            .append("configValue", getConfigValue())
             .append("owner", getOwner())
             .append("createTime", getCreateTime())
             .append("updateTime", getUpdateTime())

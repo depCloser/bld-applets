@@ -2,8 +2,6 @@ package com.bld.applets.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 用户车辆对象 applets_car
@@ -18,24 +16,14 @@ public class AppletsCar extends BaseEntity
     /** $column.columnComment */
     private Long id;
 
-    /** 品牌 */
-    @Excel(name = "品牌")
     private String brand;
 
-    /** 颜色 */
-    @Excel(name = "颜色")
     private String color;
 
-    /** 车牌号 */
-    @Excel(name = "车牌号")
     private String busNumber;
 
-    /** 图片地址 */
-    @Excel(name = "图片地址")
     private String photo;
 
-    /** 用户id */
-    @Excel(name = "用户id")
     private Long userId;
 
     public AppletsCar setId(Long id)

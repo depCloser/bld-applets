@@ -4,8 +4,6 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 反馈对象 applets_feedback
@@ -21,16 +19,13 @@ public class AppletsFeedback extends BaseEntity
     private Long id;
 
     /** 内容 */
-    @Excel(name = "内容")
     private String content;
 
     /** 时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date time;
 
     /** 用户id */
-    @Excel(name = "用户id")
     private Long userId;
 
     public AppletsFeedback setId(Long id)

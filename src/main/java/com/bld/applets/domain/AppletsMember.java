@@ -2,8 +2,6 @@ package com.bld.applets.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 会员等级配置对象 applets_member
@@ -19,11 +17,9 @@ public class AppletsMember extends BaseEntity
     private Long id;
 
     /** 会员等级 */
-    @Excel(name = "会员等级")
     private Integer level;
 
     /** 目标充电量 */
-    @Excel(name = "目标充电量")
     private Long charge;
 
     public AppletsMember setId(Long id)

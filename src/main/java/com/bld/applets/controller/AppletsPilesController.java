@@ -2,19 +2,16 @@ package com.bld.applets.controller;
 
 import java.util.List;
 
+import com.bld.applets.domain.AjaxResult;
+import com.bld.applets.domain.TableDataInfo;
 import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
 import com.bld.applets.domain.AppletsPiles;
 import com.bld.applets.service.IAppletsPilesService;
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 充电桩Controller
@@ -44,7 +41,6 @@ public class AppletsPilesController extends BaseController
     /**
      * 新增保存充电桩
      */
-    @Log(title = "充电桩", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(AppletsPiles appletsPiles)
@@ -55,7 +51,6 @@ public class AppletsPilesController extends BaseController
     /**
      * 修改保存充电桩
      */
-    @Log(title = "充电桩", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(AppletsPiles appletsPiles)
@@ -66,7 +61,6 @@ public class AppletsPilesController extends BaseController
     /**
      * 删除充电桩
      */
-    @Log(title = "充电桩", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

@@ -1,12 +1,13 @@
 package com.bld.applets.service.impl;
 
 import java.util.List;
+
+import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bld.applets.mapper.AppletsUserMapper;
 import com.bld.applets.domain.AppletsUser;
 import com.bld.applets.service.IAppletsUserService;
-import com.ruoyi.common.core.text.Convert;
 
 /**
  * 用户Service业务层处理
@@ -77,7 +78,7 @@ public class AppletsUserServiceImpl implements IAppletsUserService
     @Override
     public int deleteAppletsUserByIds(String ids)
     {
-        return appletsUserMapper.deleteAppletsUserByIds(Convert.toStrArray(ids));
+        return appletsUserMapper.deleteAppletsUserByIds(CommonUtils.toStrArray(ids));
     }
 
     /**

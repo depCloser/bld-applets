@@ -7,7 +7,7 @@ import com.bld.applets.domain.AppletsConfig;
  * 小程序参数配置Service接口
  * 
  * @author tyx
- * @date 2021-03-04
+ * @date 2021-03-06
  */
 public interface IAppletsConfigService 
 {

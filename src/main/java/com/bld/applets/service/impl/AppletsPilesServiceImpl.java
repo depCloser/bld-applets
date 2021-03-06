@@ -1,12 +1,13 @@
 package com.bld.applets.service.impl;
 
 import java.util.List;
+
+import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bld.applets.mapper.AppletsPilesMapper;
 import com.bld.applets.domain.AppletsPiles;
 import com.bld.applets.service.IAppletsPilesService;
-import com.ruoyi.common.core.text.Convert;
 
 /**
  * 充电桩Service业务层处理
@@ -77,7 +78,7 @@ public class AppletsPilesServiceImpl implements IAppletsPilesService
     @Override
     public int deleteAppletsPilesByIds(String ids)
     {
-        return appletsPilesMapper.deleteAppletsPilesByIds(Convert.toStrArray(ids));
+        return appletsPilesMapper.deleteAppletsPilesByIds(CommonUtils.toStrArray(ids));
     }
 
     /**

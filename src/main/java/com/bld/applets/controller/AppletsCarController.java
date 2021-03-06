@@ -2,19 +2,15 @@ package com.bld.applets.controller;
 
 import java.util.List;
 
+import com.bld.applets.domain.AjaxResult;
 import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
 import com.bld.applets.domain.AppletsCar;
 import com.bld.applets.service.IAppletsCarService;
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
-import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 用户车辆Controller
@@ -34,7 +30,7 @@ public class AppletsCarController extends BaseController
      */
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(AppletsCar appletsCar)
+    public Object list(AppletsCar appletsCar)
     {
         startPage();
         List<AppletsCar> list = appletsCarService.selectAppletsCarList(appletsCar.setUserId(CommonUtils.getUserId()));
@@ -44,7 +40,6 @@ public class AppletsCarController extends BaseController
     /**
      * 新增保存用户车辆
      */
-    @Log(title = "用户车辆", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(AppletsCar appletsCar)
@@ -55,7 +50,6 @@ public class AppletsCarController extends BaseController
     /**
      * 修改保存用户车辆
      */
-    @Log(title = "用户车辆", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(AppletsCar appletsCar)
@@ -66,7 +60,6 @@ public class AppletsCarController extends BaseController
     /**
      * 删除用户车辆
      */
-    @Log(title = "用户车辆", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

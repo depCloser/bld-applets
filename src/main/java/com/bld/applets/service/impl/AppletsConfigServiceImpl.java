@@ -1,39 +1,26 @@
 package com.bld.applets.service.impl;
 
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
-import com.bld.applets.utils.CacheUtils;
-import com.ruoyi.common.utils.DateUtils;
+import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.bld.applets.mapper.AppletsConfigMapper;
 import com.bld.applets.domain.AppletsConfig;
 import com.bld.applets.service.IAppletsConfigService;
-import com.ruoyi.common.core.text.Convert;
-
-import javax.annotation.PostConstruct;
 
 /**
  * 小程序参数配置Service业务层处理
  * 
  * @author tyx
- * @date 2021-03-04
+ * @date 2021-03-06
  */
 @Service
 public class AppletsConfigServiceImpl implements IAppletsConfigService 
 {
     @Autowired
     private AppletsConfigMapper appletsConfigMapper;
-
-    @PostConstruct
-    public void init () {
-        Map<String, String> collect = appletsConfigMapper.selectAppletsConfigList(new AppletsConfig())
-                .stream()
-                .collect(Collectors.toMap(AppletsConfig::getKey, AppletsConfig::getValue));
-        CacheUtils.putAll(collect);
-    }
 
     /**
      * 查询小程序参数配置
@@ -68,7 +55,7 @@ public class AppletsConfigServiceImpl implements IAppletsConfigService
     @Override
     public int insertAppletsConfig(AppletsConfig appletsConfig)
     {
-        appletsConfig.setCreateTime(DateUtils.getNowDate());
+        appletsConfig.setCreateTime(new Date());
         return appletsConfigMapper.insertAppletsConfig(appletsConfig);
     }
 
@@ -81,7 +68,7 @@ public class AppletsConfigServiceImpl implements IAppletsConfigService
     @Override
     public int updateAppletsConfig(AppletsConfig appletsConfig)
     {
-        appletsConfig.setUpdateTime(DateUtils.getNowDate());
+        appletsConfig.setUpdateTime(new Date());
         return appletsConfigMapper.updateAppletsConfig(appletsConfig);
     }
 
@@ -94,7 +81,7 @@ public class AppletsConfigServiceImpl implements IAppletsConfigService
     @Override
     public int deleteAppletsConfigByIds(String ids)
     {
-        return appletsConfigMapper.deleteAppletsConfigByIds(Convert.toStrArray(ids));
+        return appletsConfigMapper.deleteAppletsConfigByIds(CommonUtils.toStrArray(ids));
     }
 
     /**

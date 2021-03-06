@@ -2,8 +2,6 @@ package com.bld.applets.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 充电桩对象 applets_piles
@@ -19,51 +17,39 @@ public class AppletsPiles extends BaseEntity
     private Long id;
 
     /** 名称 */
-    @Excel(name = "名称")
     private String name;
 
     /** 编号 */
-    @Excel(name = "编号")
     private String code;
 
     /** 类型：1社区、0公共 */
-    @Excel(name = "类型：1社区、0公共")
     private Long type;
 
     /** 状态0维护、1正常 */
-    @Excel(name = "状态0维护、1正常")
     private Long status;
 
     /** 充电状态：0可以充电、1正在充电 */
-    @Excel(name = "充电状态：0可以充电、1正在充电")
     private Long chargedState;
 
     /** 省份 */
-    @Excel(name = "省份")
     private String addrProvince;
 
     /** 市 */
-    @Excel(name = "市")
     private String addrCity;
 
     /** 区 */
-    @Excel(name = "区")
     private String addrDistrict;
 
     /** 详细地址 */
-    @Excel(name = "详细地址")
     private String addrDetail;
 
     /** 经度 */
-    @Excel(name = "经度")
     private Long longitude;
 
     /** 纬度 */
-    @Excel(name = "纬度")
     private Long latitude;
 
     /** 属主id */
-    @Excel(name = "属主id")
     private Long userId;
 
     public AppletsPiles setId(Long id)

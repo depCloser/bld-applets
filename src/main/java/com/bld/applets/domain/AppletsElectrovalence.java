@@ -2,8 +2,6 @@ package com.bld.applets.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 充电桩电价对象 applets_electrovalence
@@ -19,31 +17,24 @@ public class AppletsElectrovalence extends BaseEntity
     private Long id;
 
     /** 开始时间 */
-    @Excel(name = "开始时间")
     private String startTime;
 
     /** 结束时间 */
-    @Excel(name = "结束时间")
     private String endTime;
 
     /** 时段：0低估、1平峰、2高峰 */
-    @Excel(name = "时段：0低估、1平峰、2高峰")
     private Integer timeFrame;
 
     /** 价格/每度 */
-    @Excel(name = "价格/每度")
     private String price;
 
     /** 价格类型：0卖出、1买入 */
-    @Excel(name = "价格类型：0卖出、1买入")
     private Integer type;
 
     /** 充电桩id */
-    @Excel(name = "充电桩id")
     private Long pilesId;
 
     /** 用户id */
-    @Excel(name = "用户id")
     private Long userId;
 
     private AppletsPiles piles;

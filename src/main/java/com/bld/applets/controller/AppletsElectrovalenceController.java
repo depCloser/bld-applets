@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.bld.applets.domain.AjaxResult;
 import com.bld.applets.domain.AppletsPiles;
 import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.ruoyi.common.annotation.Log;
-import com.ruoyi.common.enums.BusinessType;
 import com.bld.applets.domain.AppletsElectrovalence;
 import com.bld.applets.service.IAppletsElectrovalenceService;
-import com.ruoyi.common.core.controller.BaseController;
-import com.ruoyi.common.core.domain.AjaxResult;
 
 /**
  * 充电桩电价Controller
@@ -46,7 +43,6 @@ public class AppletsElectrovalenceController extends BaseController
     /**
      * 新增保存充电桩电价
      */
-    @Log(title = "充电桩电价", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(AppletsElectrovalence appletsElectrovalence)
@@ -57,7 +53,6 @@ public class AppletsElectrovalenceController extends BaseController
     /**
      * 修改保存充电桩电价
      */
-    @Log(title = "充电桩电价", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(AppletsElectrovalence appletsElectrovalence)
@@ -68,7 +63,6 @@ public class AppletsElectrovalenceController extends BaseController
     /**
      * 删除充电桩电价
      */
-    @Log(title = "充电桩电价", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
