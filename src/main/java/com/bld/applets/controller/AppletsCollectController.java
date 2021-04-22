@@ -1,5 +1,6 @@
 package com.bld.applets.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,7 @@ import com.bld.applets.domain.TableDataInfo;
 import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,7 +33,7 @@ public class AppletsCollectController extends BaseController
     /**
      * 查询用户收藏（用户-充电桩关联，多对多）列表
      */
-    @PostMapping("/list")
+    @GetMapping("/list")
     @ResponseBody
     public TableDataInfo list(AppletsCollect appletsCollect)
     {
@@ -48,6 +50,7 @@ public class AppletsCollectController extends BaseController
     @ResponseBody
     public AjaxResult addSave(AppletsCollect appletsCollect)
     {
+        appletsCollect.setCreateTime(new Date()).setUpdateTime(new Date());
         return toAjax(appletsCollectService.insertAppletsCollect(appletsCollect.setUserId(CommonUtils.getUserId())));
     }
 
@@ -58,6 +61,7 @@ public class AppletsCollectController extends BaseController
     @ResponseBody
     public AjaxResult editSave(AppletsCollect appletsCollect)
     {
+        appletsCollect.setUpdateTime(new Date());
         return toAjax(appletsCollectService.updateAppletsCollect(appletsCollect));
     }
 

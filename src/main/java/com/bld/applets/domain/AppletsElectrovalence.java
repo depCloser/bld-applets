@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 充电桩电价对象 applets_electrovalence
  * 
  * @author tyx
- * @date 2021-03-03
+ * @date 2021-03-10
  */
 public class AppletsElectrovalence extends BaseEntity
 {
@@ -140,6 +140,8 @@ public class AppletsElectrovalence extends BaseEntity
             .append("type", getType())
             .append("pilesId", getPilesId())
             .append("userId", getUserId())
+            .append("createTime", getCreateTime())
+            .append("updateTime", getUpdateTime())
             .toString();
     }
 }

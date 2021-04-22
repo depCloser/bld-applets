@@ -38,9 +38,10 @@ public class BaseEntity implements Serializable
         return createTime;
     }
 
-    public void setCreateTime(Date createTime)
+    public BaseEntity setCreateTime(Date createTime)
     {
         this.createTime = createTime;
+        return this;
     }
 
     public String getUpdateBy()
@@ -48,9 +49,10 @@ public class BaseEntity implements Serializable
         return updateBy;
     }
 
-    public void setUpdateBy(String updateBy)
+    public BaseEntity setUpdateBy(String updateBy)
     {
         this.updateBy = updateBy;
+        return this;
     }
 
     public Date getUpdateTime()
@@ -58,9 +60,10 @@ public class BaseEntity implements Serializable
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime)
+    public BaseEntity setUpdateTime(Date updateTime)
     {
         this.updateTime = updateTime;
+        return this;
     }
 
     public String getRemark()
@@ -68,9 +71,10 @@ public class BaseEntity implements Serializable
         return remark;
     }
 
-    public void setRemark(String remark)
+    public BaseEntity setRemark(String remark)
     {
         this.remark = remark;
+        return this;
     }
 
     public Map<String, Object> getParams()
@@ -82,9 +86,10 @@ public class BaseEntity implements Serializable
         return params;
     }
 
-    public void setParams(Map<String, Object> params)
+    public BaseEntity setParams(Map<String, Object> params)
     {
         this.params = params;
+        return this;
     }
 
 }

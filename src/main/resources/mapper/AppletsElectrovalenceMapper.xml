@@ -13,11 +13,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="type"    column="type"    />
         <result property="pilesId"    column="piles_id"    />
         <result property="userId"    column="user_id"    />
+        <result property="createTime"    column="createTime"    />
+        <result property="updateTime"    column="updateTime"    />
         <association property="piles" column="piles_id" select="com.bld.applets.mapper.AppletsPilesMapper.selectAppletsPilesById" />
     </resultMap>
 
     <sql id="selectAppletsElectrovalenceVo">
-        select id, start_time, end_time, time_frame, price, type, piles_id, user_id from applets_electrovalence
+        select id, start_time, end_time, time_frame, price, `type`, piles_id, user_id, createTime, updateTime from applets_electrovalence
     </sql>
 
     <select id="selectAppletsElectrovalenceList" parameterType="AppletsElectrovalence" resultMap="AppletsElectrovalenceResult">
@@ -30,6 +32,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null "> and type = #{type}</if>
             <if test="pilesId != null "> and piles_id = #{pilesId}</if>
             <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="createTime != null "> and createTime = #{createTime}</if>
+            <if test="updateTime != null "> and updateTime = #{updateTime}</if>
         </where>
     </select>
     
@@ -48,6 +52,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null">type,</if>
             <if test="pilesId != null">piles_id,</if>
             <if test="userId != null">user_id,</if>
+            <if test="createTime != null">createTime,</if>
+            <if test="updateTime != null">updateTime,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="startTime != null">#{startTime},</if>
@@ -57,7 +63,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null">#{type},</if>
             <if test="pilesId != null">#{pilesId},</if>
             <if test="userId != null">#{userId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
          </trim>
+    </insert>
+
+    <insert id="batchInsertAppletsElectrovalence" parameterType="list" useGeneratedKeys="true" keyProperty="id">
+        insert into applets_electrovalence
+            (start_time, end_time, time_frame, price, `type`, piles_id, user_id, createTime, updateTime)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.startTime},#{item.endTime},#{item.timeFrame},#{item.price},#{item.type},
+            #{item.pilesId},#{item.userId},#{item.createTime},#{item.updateTime}
+            )
+        </foreach>
     </insert>
 
     <update id="updateAppletsElectrovalence" parameterType="AppletsElectrovalence">
@@ -70,6 +90,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="type != null">type = #{type},</if>
             <if test="pilesId != null">piles_id = #{pilesId},</if>
             <if test="userId != null">user_id = #{userId},</if>
+            <if test="createTime != null">createTime = #{createTime},</if>
+            <if test="updateTime != null">updateTime = #{updateTime},</if>
         </trim>
         where id = #{id}
     </update>

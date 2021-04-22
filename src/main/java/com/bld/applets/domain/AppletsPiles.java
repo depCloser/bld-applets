@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 充电桩对象 applets_piles
  * 
  * @author tyx
- * @date 2021-03-03
+ * @date 2021-03-10
  */
 public class AppletsPiles extends BaseEntity
 {
@@ -28,8 +28,11 @@ public class AppletsPiles extends BaseEntity
     /** 状态0维护、1正常 */
     private Long status;
 
-    /** 充电状态：0可以充电、1正在充电 */
+    /** 充电状态：0可以充电、1正在充电、2重启 */
     private Long chargedState;
+
+    /** 充电方式：1直流快充 */
+    private Long chargedType;
 
     /** 省份 */
     private String addrProvince;
@@ -51,6 +54,12 @@ public class AppletsPiles extends BaseEntity
 
     /** 属主id */
     private Long userId;
+
+    /** 累计充电量 */
+    private Long chargedNum;
+
+    /** 功率 */
+    private String power;
 
     public AppletsPiles setId(Long id)
     {
@@ -183,6 +192,33 @@ public class AppletsPiles extends BaseEntity
         return userId;
     }
 
+    public String getPower() {
+        return power;
+    }
+
+    public AppletsPiles setPower(String power) {
+        this.power = power;
+        return this;
+    }
+
+    public Long getChargedType() {
+        return chargedType;
+    }
+
+    public AppletsPiles setChargedType(Long chargedType) {
+        this.chargedType = chargedType;
+        return this;
+    }
+
+    public Long getChargedNum() {
+        return chargedNum;
+    }
+
+    public AppletsPiles setChargedNum(Long chargedNum) {
+        this.chargedNum = chargedNum;
+        return this;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -199,6 +235,12 @@ public class AppletsPiles extends BaseEntity
             .append("longitude", getLongitude())
             .append("latitude", getLatitude())
             .append("userId", getUserId())
+            .append("createTime", getCreateTime())
+            .append("updateTime", getUpdateTime())
+            .append("power", getPower())
+            .append("chargedType", getChargedType())
+            .append("chargedNum", getChargedNum())
             .toString();
     }
+
 }

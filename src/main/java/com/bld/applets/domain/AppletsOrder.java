@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 订单对象 applets_order
  * 
  * @author tyx
- * @date 2021-03-03
+ * @date 2021-03-10
  */
 public class AppletsOrder extends BaseEntity
 {
@@ -24,22 +24,27 @@ public class AppletsOrder extends BaseEntity
     /** 订单状态：0待支付、1已支付、2已完成 */
     private Integer status;
 
+    /** 订单类型：1充电订单 2充值订单 */
+    private Integer type;
+
+    /** 订单描述 */
+    private String desc;
+
     /** 用户id */
     private Long userId;
+
+    /** 用户昵称 */
+    private String userName;
 
     /** 充电桩id */
     private Long pilesId;
 
-    /** 创建日期 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date date;
-
     /** 充电开始时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
     /** 充电结束时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
     /** 花费金额 */
@@ -50,6 +55,18 @@ public class AppletsOrder extends BaseEntity
 
     /** 积分 */
     private Long integral;
+
+    /** 花费金额 */
+    private String prepayId;
+
+    /** 支付类型 1微信 2余额 */
+    private Integer paymentType;
+
+    /** 备注 */
+    private String remark;
+
+    /** 微信备注 */
+    private String callBack;
 
     private AppletsPiles piles;
 
@@ -99,19 +116,18 @@ public class AppletsOrder extends BaseEntity
         return this;
     }
 
-    public Long getPilesId() 
-    {
-        return pilesId;
+    public String getUserName() {
+        return userName;
     }
-    public AppletsOrder setDate(Date date)
-    {
-        this.date = date;
+
+    public AppletsOrder setUserName(String userName) {
+        this.userName = userName;
         return this;
     }
 
-    public Date getDate() 
+    public Long getPilesId()
     {
-        return date;
+        return pilesId;
     }
     public AppletsOrder setStartTime(Date startTime)
     {
@@ -173,21 +189,85 @@ public class AppletsOrder extends BaseEntity
         return this;
     }
 
+    public String getPrepayId() {
+        return prepayId;
+    }
+
+    public AppletsOrder setPrepayId(String prepayId) {
+        this.prepayId = prepayId;
+        return this;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public AppletsOrder setType(Integer type) {
+        this.type = type;
+        return this;
+    }
+
+    public Integer getPaymentType() {
+        return paymentType;
+    }
+
+    public AppletsOrder setPaymentType(Integer paymentType) {
+        this.paymentType = paymentType;
+        return this;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public AppletsOrder setDesc(String desc) {
+        this.desc = desc;
+        return this;
+    }
+
+    @Override
+    public String getRemark() {
+        return remark;
+    }
+
+    @Override
+    public AppletsOrder setRemark(String remark) {
+        this.remark = remark;
+        return this;
+    }
+
+    public String getCallBack() {
+        return callBack;
+    }
+
+    public AppletsOrder setCallBack(String callBack) {
+        this.callBack = callBack;
+        return this;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("code", getCode())
             .append("status", getStatus())
+            .append("type", getType())
             .append("userId", getUserId())
+            .append("userName", getUserName())
             .append("pilesId", getPilesId())
-            .append("date", getDate())
+            .append("createTime", getCreateTime())
+            .append("updateTime", getUpdateTime())
             .append("startTime", getStartTime())
             .append("endTime", getEndTime())
-            .append("updateTime", getUpdateTime())
             .append("cost", getCost())
             .append("charge", getCharge())
             .append("integral", getIntegral())
+            .append("prepayId", getPrepayId())
+            .append("paymentType", getPaymentType())
+            .append("desc", getDesc())
+            .append("remark", getRemark())
+            .append("callBack", getCallBack())
             .toString();
     }
+
 }

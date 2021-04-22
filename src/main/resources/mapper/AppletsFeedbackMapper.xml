@@ -7,20 +7,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <resultMap type="AppletsFeedback" id="AppletsFeedbackResult">
         <result property="id"    column="id"    />
         <result property="content"    column="content"    />
-        <result property="time"    column="time"    />
         <result property="userId"    column="user_id"    />
+        <result property="updateTime"    column="updateTime"    />
+        <result property="createTime"    column="createTime"    />
     </resultMap>
 
     <sql id="selectAppletsFeedbackVo">
-        select id, content, time, user_id from applets_feedback
+        select id, content, user_id, updateTime, createTime from applets_feedback
     </sql>
 
     <select id="selectAppletsFeedbackList" parameterType="AppletsFeedback" resultMap="AppletsFeedbackResult">
         <include refid="selectAppletsFeedbackVo"/>
         <where>  
             <if test="content != null  and content != ''"> and content = #{content}</if>
-            <if test="time != null "> and time = #{time}</if>
             <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="updateTime != null "> and updateTime = #{updateTime}</if>
+            <if test="createTime != null "> and createTime = #{createTime}</if>
         </where>
     </select>
     
@@ -33,13 +35,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into applets_feedback
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="content != null">content,</if>
-            <if test="time != null">time,</if>
             <if test="userId != null">user_id,</if>
+            <if test="updateTime != null">updateTime,</if>
+            <if test="createTime != null">createTime,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="content != null">#{content},</if>
-            <if test="time != null">#{time},</if>
             <if test="userId != null">#{userId},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="createTime != null">#{createTime},</if>
          </trim>
     </insert>
 
@@ -47,8 +51,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update applets_feedback
         <trim prefix="SET" suffixOverrides=",">
             <if test="content != null">content = #{content},</if>
-            <if test="time != null">time = #{time},</if>
             <if test="userId != null">user_id = #{userId},</if>
+            <if test="updateTime != null">updateTime = #{updateTime},</if>
+            <if test="createTime != null">createTime = #{createTime},</if>
         </trim>
         where id = #{id}
     </update>

@@ -59,4 +59,8 @@ public interface IAppletsOrderService
      */
     public int deleteAppletsOrderById(Long id);
 
+    public List<AppletsOrder> selectCompletOrder(Long userId);
+
+    public List<AppletsOrder> queryProfit(Long userId);
+
 }

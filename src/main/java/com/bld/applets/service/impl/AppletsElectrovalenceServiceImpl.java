@@ -57,6 +57,11 @@ public class AppletsElectrovalenceServiceImpl implements IAppletsElectrovalenceS
         return appletsElectrovalenceMapper.insertAppletsElectrovalence(appletsElectrovalence);
     }
 
+    @Override
+    public int batchInsertAppletsElectrovalence(List<AppletsElectrovalence> list) {
+        return appletsElectrovalenceMapper.batchInsertAppletsElectrovalence(list);
+    }
+
     /**
      * 修改充电桩电价
      * 
@@ -91,5 +96,10 @@ public class AppletsElectrovalenceServiceImpl implements IAppletsElectrovalenceS
     public int deleteAppletsElectrovalenceById(Long id)
     {
         return appletsElectrovalenceMapper.deleteAppletsElectrovalenceById(id);
+    }
+
+    @Override
+    public int deleteAllElectrovalenceByPilesId(Long pid) {
+        return appletsElectrovalenceMapper.deleteAllElectrovalenceByPilesId(pid);
     }
 }

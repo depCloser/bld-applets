@@ -1,5 +1,6 @@
 package com.bld.applets.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import com.bld.applets.domain.AjaxResult;
@@ -7,6 +8,7 @@ import com.bld.applets.domain.TableDataInfo;
 import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,7 +31,7 @@ public class AppletsFeedbackController extends BaseController
     /**
      * 查询反馈列表
      */
-    @PostMapping("/list")
+    @GetMapping("/list")
     @ResponseBody
     public TableDataInfo list(AppletsFeedback appletsFeedback)
     {
@@ -45,6 +47,7 @@ public class AppletsFeedbackController extends BaseController
     @ResponseBody
     public AjaxResult addSave(AppletsFeedback appletsFeedback)
     {
+        appletsFeedback.setCreateTime(new Date()).setUpdateTime(new Date());
         return toAjax(appletsFeedbackService.insertAppletsFeedback(appletsFeedback.setUserId(CommonUtils.getUserId())));
     }
 
@@ -55,6 +58,7 @@ public class AppletsFeedbackController extends BaseController
     @ResponseBody
     public AjaxResult editSave(AppletsFeedback appletsFeedback)
     {
+        appletsFeedback.setUpdateTime(new Date());
         return toAjax(appletsFeedbackService.updateAppletsFeedback(appletsFeedback));
     }
 

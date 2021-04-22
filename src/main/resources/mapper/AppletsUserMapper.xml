@@ -14,10 +14,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="balance"    column="balance"    />
         <result property="photo"    column="photo"    />
         <result property="code"    column="code"    />
+        <result property="sex"    column="sex"    />
+        <result property="createTime"    column="createTime"    />
+        <result property="updateTime"    column="updateTime"    />
     </resultMap>
 
     <sql id="selectAppletsUserVo">
-        select id, name, phone, level, owner, integral, balance, photo, code from applets_user
+        select id, name, phone, level, owner, integral, balance, photo, code, createTime, updateTime, sex from applets_user
     </sql>
 
     <select id="selectAppletsUserList" parameterType="AppletsUser" resultMap="AppletsUserResult">
@@ -31,6 +34,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="balance != null  and balance != ''"> and balance = #{balance}</if>
             <if test="photo != null  and photo != ''"> and photo = #{photo}</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="createTime != null "> and createTime = #{createTime}</if>
+            <if test="updateTime != null "> and updateTime = #{updateTime}</if>
         </where>
     </select>
     
@@ -39,10 +45,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
         
-    <insert id="insertAppletsUser" parameterType="AppletsUser">
+    <insert id="insertAppletsUser" parameterType="AppletsUser" useGeneratedKeys="true" keyProperty="id">
         insert into applets_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">id,</if>
             <if test="name != null">name,</if>
             <if test="phone != null">phone,</if>
             <if test="level != null">level,</if>
@@ -51,9 +56,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="balance != null">balance,</if>
             <if test="photo != null">photo,</if>
             <if test="code != null">code,</if>
+            <if test="sex != null">sex,</if>
+            <if test="createTime != null">createTime,</if>
+            <if test="updateTime != null">updateTime,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">#{id},</if>
             <if test="name != null">#{name},</if>
             <if test="phone != null">#{phone},</if>
             <if test="level != null">#{level},</if>
@@ -62,6 +69,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="balance != null">#{balance},</if>
             <if test="photo != null">#{photo},</if>
             <if test="code != null">#{code},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
          </trim>
     </insert>
 
@@ -76,8 +86,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="balance != null">balance = #{balance},</if>
             <if test="photo != null">photo = #{photo},</if>
             <if test="code != null">code = #{code},</if>
+            <if test="sex != null">code = #{sex},</if>
+            <if test="createTime != null">createTime = #{createTime},</if>
+            <if test="updateTime != null">updateTime = #{updateTime},</if>
         </trim>
         where id = #{id}
+    </update>
+
+    <update id="updateUserBySql" parameterType="string">
+        update applets_user set ${sql}
     </update>
 
     <delete id="deleteAppletsUserById" parameterType="Long">

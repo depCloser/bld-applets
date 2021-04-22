@@ -66,7 +66,17 @@ public class AppletsUserServiceImpl implements IAppletsUserService
     @Override
     public int updateAppletsUser(AppletsUser appletsUser)
     {
+        int i = appletsUserMapper.updateAppletsUser(appletsUser);
+        if (i > 0) {
+            // 更新session信息
+            CommonUtils.getSession().setAttribute("user", appletsUser);
+        }
         return appletsUserMapper.updateAppletsUser(appletsUser);
+    }
+
+    @Override
+    public int updateUserBySql(String sql) {
+        return appletsUserMapper.updateUserBySql(sql);
     }
 
     /**
@@ -94,8 +104,8 @@ public class AppletsUserServiceImpl implements IAppletsUserService
     }
 
     @Override
-    public Long getThisMonthCharge() {
-        return appletsUserMapper.getThisMonthCharge();
+    public Long getThisMonthCharge(Long userId) {
+        return appletsUserMapper.getThisMonthCharge(userId);
     }
 
 }

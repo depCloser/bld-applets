@@ -35,6 +35,8 @@ public interface IAppletsElectrovalenceService
      */
     public int insertAppletsElectrovalence(AppletsElectrovalence appletsElectrovalence);
 
+    public int batchInsertAppletsElectrovalence(List<AppletsElectrovalence> list);
+
     /**
      * 修改充电桩电价
      * 
@@ -58,4 +60,14 @@ public interface IAppletsElectrovalenceService
      * @return 结果
      */
     public int deleteAppletsElectrovalenceById(Long id);
+
+    /**
+     * @Author: tyx
+     * @Description: 删除充电桩相关联的所有电价记录
+     * @Param: [id]
+     * @return: int
+     * @Date: 2021/4/6
+     */
+    public int deleteAllElectrovalenceByPilesId(Long pid);
+
 }

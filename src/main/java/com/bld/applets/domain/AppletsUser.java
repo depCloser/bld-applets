@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 用户对象 applets_user
  * 
  * @author tyx
- * @date 2021-03-03
+ * @date 2021-03-10
  */
 public class AppletsUser extends BaseEntity
 {
@@ -39,6 +39,15 @@ public class AppletsUser extends BaseEntity
 
     /** 注册标识码 */
     private String code;
+
+    /** 性别 0女 1男 **/
+    private Integer sex;
+
+    private String sessionKey;
+
+    private Integer status;
+
+    private Integer isAuth;
 
     private Long monthCharge;
 
@@ -153,6 +162,42 @@ public class AppletsUser extends BaseEntity
         return this;
     }
 
+    public Integer getSex() {
+        return sex;
+    }
+
+    public AppletsUser setSex(Integer sex) {
+        this.sex = sex;
+        return this;
+    }
+
+    public String getSessionKey() {
+        return sessionKey;
+    }
+
+    public AppletsUser setSessionKey(String sessionKey) {
+        this.sessionKey = sessionKey;
+        return this;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public AppletsUser setStatus(Integer status) {
+        this.status = status;
+        return this;
+    }
+
+    public Integer getIsAuth() {
+        return isAuth;
+    }
+
+    public AppletsUser setIsAuth(Integer isAuth) {
+        this.isAuth = isAuth;
+        return this;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -165,6 +210,12 @@ public class AppletsUser extends BaseEntity
             .append("balance", getBalance())
             .append("photo", getPhoto())
             .append("code", getCode())
+            .append("createTime", getCreateTime())
+            .append("updateTime", getUpdateTime())
+            .append("sex", getSex())
+            .append("status", getStatus())
+            .append("sessionKey", getSessionKey())
+            .append("isAuth", getIsAuth())
             .toString();
     }
 }

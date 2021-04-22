@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bld.applets.mapper.AppletsPowerMapper">
+    
+    <resultMap type="AppletsPower" id="AppletsPowerResult">
+        <result property="id"    column="id"    />
+        <result property="pId"    column="p_id"    />
+        <result property="power"    column="power"    />
+        <result property="electricity"    column="electricity"    />
+        <result property="time"    column="time"    />
+        <result property="date"    column="date"    />
+    </resultMap>
+
+    <sql id="selectAppletsPowerVo">
+        select id, p_id, power, electricity, time, date from applets_power
+    </sql>
+
+    <select id="selectAppletsPowerList" parameterType="AppletsPower" resultMap="AppletsPowerResult">
+        <include refid="selectAppletsPowerVo"/>
+        <where>  
+            <if test="pId != null "> and p_id = #{pId}</if>
+            <if test="power != null  and power != ''"> and power = #{power}</if>
+            <if test="electricity != null  and electricity != ''"> and electricity = #{electricity}</if>
+            <if test="time != null  and time != ''"> and time = #{time}</if>
+            <if test="date != null "> and date = #{date}</if>
+        </where>
+    </select>
+    
+    <select id="selectAppletsPowerById" parameterType="Long" resultMap="AppletsPowerResult">
+        <include refid="selectAppletsPowerVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAppletsPower" parameterType="AppletsPower">
+        insert into applets_power
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="pId != null">p_id,</if>
+            <if test="power != null">power,</if>
+            <if test="electricity != null">electricity,</if>
+            <if test="time != null">time,</if>
+            <if test="date != null">date,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="pId != null">#{pId},</if>
+            <if test="power != null">#{power},</if>
+            <if test="electricity != null">#{electricity},</if>
+            <if test="time != null">#{time},</if>
+            <if test="date != null">#{date},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAppletsPower" parameterType="AppletsPower">
+        update applets_power
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pId != null">p_id = #{pId},</if>
+            <if test="power != null">power = #{power},</if>
+            <if test="electricity != null">electricity = #{electricity},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="date != null">date = #{date},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAppletsPowerById" parameterType="Long">
+        delete from applets_power where id = #{id}
+    </delete>
+
+    <delete id="deleteAppletsPowerByIds" parameterType="String">
+        delete from applets_power where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

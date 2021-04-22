@@ -95,4 +95,9 @@ public class AppletsConfigServiceImpl implements IAppletsConfigService
     {
         return appletsConfigMapper.deleteAppletsConfigById(id);
     }
+
+    @Override
+    public List<AppletsConfig> selectConfigLikeKey(String key) {
+        return appletsConfigMapper.selectConfigLikeKey(key);
+    }
 }

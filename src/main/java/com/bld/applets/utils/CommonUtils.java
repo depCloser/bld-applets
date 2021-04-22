@@ -7,6 +7,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.util.Enumeration;
 
 /**
  * @author tyx
@@ -27,6 +32,10 @@ public class CommonUtils {
 
     public static HttpServletResponse getResponse () {
         return getServletRequestAttributes().getResponse();
+    }
+
+    public static HttpSession getSession () {
+        return getRequest().getSession();
     }
 
     /*
@@ -63,6 +72,21 @@ public class CommonUtils {
 
     public static String[] toStrArray (String str) {
         return str.split(",");
+    }
+
+    public static String getPostData (HttpServletRequest request) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        String line;
+        StringBuilder sb = new StringBuilder();
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+        return sb.toString();
+    }
+
+    // 比较字符串数字
+    public static double compareStrNum (String a, String b) {
+        return new BigDecimal(a).subtract(new BigDecimal(b)).doubleValue();
     }
 
 }

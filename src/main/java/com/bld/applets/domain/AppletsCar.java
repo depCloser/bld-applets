@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 用户车辆对象 applets_car
  * 
  * @author tyx
- * @date 2021-03-03
+ * @date 2021-03-10
  */
 public class AppletsCar extends BaseEntity
 {
@@ -16,12 +16,16 @@ public class AppletsCar extends BaseEntity
     /** $column.columnComment */
     private Long id;
 
+    /** 品牌 */
     private String brand;
 
+    /** 颜色 */
     private String color;
 
-    private String busNumber;
+    /** 车牌号 */
+        private String busNumber;
 
+    /** 图片地址 */
     private String photo;
 
     private Long userId;
@@ -96,6 +100,8 @@ public class AppletsCar extends BaseEntity
             .append("busNumber", getBusNumber())
             .append("photo", getPhoto())
             .append("userId", getUserId())
+            .append("createTime", getCreateTime())
+            .append("updateTime", getUpdateTime())
             .toString();
     }
 }

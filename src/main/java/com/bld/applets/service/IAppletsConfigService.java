@@ -58,4 +58,7 @@ public interface IAppletsConfigService
      * @return 结果
      */
     public int deleteAppletsConfigById(Long id);
+
+    public List<AppletsConfig> selectConfigLikeKey (String key);
+
 }

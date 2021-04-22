@@ -94,4 +94,15 @@ public class AppletsOrderServiceImpl implements IAppletsOrderService
     {
         return appletsOrderMapper.deleteAppletsOrderById(id);
     }
+
+    @Override
+    public List<AppletsOrder> selectCompletOrder(Long userId) {
+        return appletsOrderMapper.selectCompletOrder(userId);
+    }
+
+    @Override
+    public List<AppletsOrder> queryProfit(Long userId) {
+        return appletsOrderMapper.queryProfit(userId);
+    }
+
 }

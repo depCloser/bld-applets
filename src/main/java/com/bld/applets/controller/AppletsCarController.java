@@ -1,11 +1,13 @@
 package com.bld.applets.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import com.bld.applets.domain.AjaxResult;
 import com.bld.applets.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +30,7 @@ public class AppletsCarController extends BaseController
     /**
      * 查询用户车辆列表
      */
-    @PostMapping("/list")
+    @GetMapping("/list")
     @ResponseBody
     public Object list(AppletsCar appletsCar)
     {
@@ -44,6 +46,7 @@ public class AppletsCarController extends BaseController
     @ResponseBody
     public AjaxResult addSave(AppletsCar appletsCar)
     {
+        appletsCar.setCreateTime(new Date()).setUpdateTime(new Date());
         return toAjax(appletsCarService.insertAppletsCar(appletsCar.setUserId(CommonUtils.getUserId())));
     }
 
@@ -54,6 +57,7 @@ public class AppletsCarController extends BaseController
     @ResponseBody
     public AjaxResult editSave(AppletsCar appletsCar)
     {
+        appletsCar.setUpdateTime(new Date());
         return toAjax(appletsCarService.updateAppletsCar(appletsCar));
     }
 

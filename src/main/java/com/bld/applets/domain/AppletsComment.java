@@ -1,7 +1,5 @@
 package com.bld.applets.domain;
 
-import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -9,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 评论对象 applets_comment
  * 
  * @author tyx
- * @date 2021-03-03
+ * @date 2021-03-10
  */
 public class AppletsComment extends BaseEntity
 {
@@ -20,10 +18,6 @@ public class AppletsComment extends BaseEntity
 
     /** 评论内容 */
     private String content;
-
-    /** 评论时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date time;
 
     /** 星级 */
     private Integer level;
@@ -58,16 +52,6 @@ public class AppletsComment extends BaseEntity
     public String getContent() 
     {
         return content;
-    }
-    public AppletsComment setTime(Date time)
-    {
-        this.time = time;
-        return this;
-    }
-
-    public Date getTime() 
-    {
-        return time;
     }
     public AppletsComment setLevel(Integer level)
     {
@@ -124,11 +108,12 @@ public class AppletsComment extends BaseEntity
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("content", getContent())
-            .append("time", getTime())
             .append("level", getLevel())
             .append("tag", getTag())
             .append("userId", getUserId())
             .append("pilesId", getPilesId())
+            .append("createTime", getCreateTime())
+            .append("updateTime", getUpdateTime())
             .toString();
     }
 }

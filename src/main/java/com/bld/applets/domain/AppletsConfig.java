@@ -7,13 +7,13 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 小程序参数配置对象 applets_config
  * 
  * @author tyx
- * @date 2021-03-06
+ * @date 2021-03-10
  */
 public class AppletsConfig extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /**  */
+    /** $column.columnComment */
     private Long id;
 
     /** 参数名 */
@@ -27,6 +27,9 @@ public class AppletsConfig extends BaseEntity
 
     /** 创建者 */
     private String owner;
+
+    public AppletsConfig() {
+    }
 
     public AppletsConfig setId(Long id)
     {

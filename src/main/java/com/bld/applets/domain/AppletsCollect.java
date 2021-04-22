@@ -4,10 +4,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * 用户收藏（用户-充电桩关联，多对多）对象 applets_collect
+ * 用户收藏对象 applets_collect
  * 
  * @author tyx
- * @date 2021-03-03
+ * @date 2021-03-10
  */
 public class AppletsCollect extends BaseEntity
 {
@@ -70,6 +70,8 @@ public class AppletsCollect extends BaseEntity
             .append("id", getId())
             .append("userId", getUserId())
             .append("pilesId", getPilesId())
+            .append("createTime", getCreateTime())
+            .append("updateTime", getUpdateTime())
             .toString();
     }
 }

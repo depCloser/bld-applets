@@ -30,9 +30,16 @@ public class BaseController
     protected void startPage()
     {
         HttpServletRequest request = CommonUtils.getRequest();
+        // 排序列
+        String orderByColumn = request.getParameter("orderByColumn");
+        String orderBy = "";
+        if (StringUtils.isNotEmpty(orderByColumn)) {
+            // 排列顺序
+            orderBy = orderByColumn + request.getParameter("orderBy");
+        }
         PageHelper.startPage(Convert.toInt(request.getParameter("pageNum"), 1),
                 Convert.toInt(request.getParameter("pageSize"), 10),
-                Convert.toStr(request.getParameter("orderBy"), "desc"));
+                orderBy);
     }
 
     /**

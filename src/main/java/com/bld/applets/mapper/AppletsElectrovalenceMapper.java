@@ -2,6 +2,8 @@ package com.bld.applets.mapper;
 
 import java.util.List;
 import com.bld.applets.domain.AppletsElectrovalence;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 充电桩电价Mapper接口
@@ -35,6 +37,8 @@ public interface AppletsElectrovalenceMapper
      */
     public int insertAppletsElectrovalence(AppletsElectrovalence appletsElectrovalence);
 
+    public int batchInsertAppletsElectrovalence(List<AppletsElectrovalence> list);
+
     /**
      * 修改充电桩电价
      * 
@@ -58,4 +62,8 @@ public interface AppletsElectrovalenceMapper
      * @return 结果
      */
     public int deleteAppletsElectrovalenceByIds(String[] ids);
+
+    @Delete("delete from applets_electrovalence where piles_id = #{pid}")
+    public int deleteAllElectrovalenceByPilesId(Long pid);
+
 }

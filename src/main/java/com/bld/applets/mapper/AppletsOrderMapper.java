@@ -2,6 +2,7 @@ package com.bld.applets.mapper;
 
 import java.util.List;
 import com.bld.applets.domain.AppletsOrder;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 订单Mapper接口
@@ -11,6 +12,10 @@ import com.bld.applets.domain.AppletsOrder;
  */
 public interface AppletsOrderMapper 
 {
+
+    @Select("select * from applets_order where payment_type = 2 and status != 1 and user_id = #{userId}")
+    public List<AppletsOrder> selectCompletOrder(Long userId);
+
     /**
      * 查询订单
      * 
@@ -58,4 +63,7 @@ public interface AppletsOrderMapper
      * @return 结果
      */
     public int deleteAppletsOrderByIds(String[] ids);
+
+    public List<AppletsOrder> queryProfit(Long userId);
+
 }

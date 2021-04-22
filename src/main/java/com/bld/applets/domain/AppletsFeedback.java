@@ -1,7 +1,5 @@
 package com.bld.applets.domain;
 
-import java.util.Date;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -9,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 反馈对象 applets_feedback
  * 
  * @author tyx
- * @date 2021-03-03
+ * @date 2021-03-10
  */
 public class AppletsFeedback extends BaseEntity
 {
@@ -20,10 +18,6 @@ public class AppletsFeedback extends BaseEntity
 
     /** 内容 */
     private String content;
-
-    /** 时间 */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date time;
 
     /** 用户id */
     private Long userId;
@@ -48,16 +42,6 @@ public class AppletsFeedback extends BaseEntity
     {
         return content;
     }
-    public AppletsFeedback setTime(Date time)
-    {
-        this.time = time;
-        return this;
-    }
-
-    public Date getTime() 
-    {
-        return time;
-    }
     public AppletsFeedback setUserId(Long userId)
     {
         this.userId = userId;
@@ -74,8 +58,9 @@ public class AppletsFeedback extends BaseEntity
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("id", getId())
             .append("content", getContent())
-            .append("time", getTime())
             .append("userId", getUserId())
+            .append("updateTime", getUpdateTime())
+            .append("createTime", getCreateTime())
             .toString();
     }
 }

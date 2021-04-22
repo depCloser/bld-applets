@@ -2,6 +2,7 @@ package com.bld.applets.mapper;
 
 import java.util.List;
 import com.bld.applets.domain.AppletsConfig;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 小程序参数配置Mapper接口
@@ -58,4 +59,8 @@ public interface AppletsConfigMapper
      * @return 结果
      */
     public int deleteAppletsConfigByIds(String[] ids);
+
+    @Select("select * from applets_config where config_key like ${key}")
+    public List<AppletsConfig> selectConfigLikeKey (String key);
+
 }

@@ -43,6 +43,8 @@ public interface IAppletsUserService
      */
     public int updateAppletsUser(AppletsUser appletsUser);
 
+    public int updateUserBySql(String sql);
+
     /**
      * 批量删除用户
      * 
@@ -59,6 +61,6 @@ public interface IAppletsUserService
      */
     public int deleteAppletsUserById(Long id);
 
-    public Long getThisMonthCharge ();
+    public Long getThisMonthCharge (Long userId);
 
 }

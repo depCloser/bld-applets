@@ -18,10 +18,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="longitude"    column="longitude"    />
         <result property="latitude"    column="latitude"    />
         <result property="userId"    column="user_id"    />
+        <result property="createTime"    column="createTime"    />
+        <result property="updateTime"    column="updateTime"    />
     </resultMap>
 
     <sql id="selectAppletsPilesVo">
-        select id, name, code, type, status, charged_state, addr_province, addr_city, addr_district, addr_detail, longitude, latitude, user_id from applets_piles
+        select id, name, code, type, status, charged_state, addr_province, addr_city, addr_district, addr_detail, longitude, latitude, user_id, createTime, updateTime from applets_piles
     </sql>
 
     <select id="selectAppletsPilesList" parameterType="AppletsPiles" resultMap="AppletsPilesResult">
@@ -39,6 +41,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="longitude != null "> and longitude = #{longitude}</if>
             <if test="latitude != null "> and latitude = #{latitude}</if>
             <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="createTime != null "> and createTime = #{createTime}</if>
+            <if test="updateTime != null "> and updateTime = #{updateTime}</if>
         </where>
     </select>
     
@@ -62,6 +66,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="longitude != null">longitude,</if>
             <if test="latitude != null">latitude,</if>
             <if test="userId != null">user_id,</if>
+            <if test="createTime != null">createTime,</if>
+            <if test="updateTime != null">updateTime,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null">#{name},</if>
@@ -76,6 +82,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="longitude != null">#{longitude},</if>
             <if test="latitude != null">#{latitude},</if>
             <if test="userId != null">#{userId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
          </trim>
     </insert>
 
@@ -94,6 +102,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="longitude != null">longitude = #{longitude},</if>
             <if test="latitude != null">latitude = #{latitude},</if>
             <if test="userId != null">user_id = #{userId},</if>
+            <if test="createTime != null">createTime = #{createTime},</if>
+            <if test="updateTime != null">updateTime = #{updateTime},</if>
         </trim>
         where id = #{id}
     </update>

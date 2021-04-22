@@ -1,5 +1,6 @@
 package com.bld.applets.utils;
 
+import com.bld.applets.domain.AppletsOrder;
 import com.bld.applets.domain.AppletsUser;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.gavaghan.geodesy.Ellipsoid;
@@ -44,27 +45,26 @@ public class ServiceUtil {
      * @Date: 2021/3/3
      */
     public static String generateOrderCode () {
-        return String.valueOf(System.currentTimeMillis()) + RandomStringUtils.randomNumeric(8);
+        return System.currentTimeMillis() + RandomStringUtils.randomNumeric(8);
     }
 
-    public static String getCost () {
-        // 计算发电量
-        // 计算价格
-        return "10";
+    // 计算价格
+    public static String getCost (AppletsOrder order) {
+        return "0.01";
     }
 
-    public static Long getIntegral () {
+    public static Long getIntegral (AppletsOrder order) {
         // 计算积分
         return 5l;
     }
 
-    public static Long getCharge () {
-        // 计算积分
+    // 计算充电量
+    public static Long getCharge (AppletsOrder order) {
         return 5l;
     }
 
+    // 计算等级经验差
     public static Long getMemberDifference () {
-        // 计算等级经验差
         return 300l;
     }
 

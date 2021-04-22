@@ -30,7 +30,10 @@ public class AjaxResult extends HashMap<String, Object>
         /** 警告 */
         WARN(301),
         /** 错误 */
-        ERROR(500);
+        ERROR(500),
+        /** 请求参数缺失 **/
+        PARAMETERS_MISSING (400);
+
         private final int value;
 
         Type(int value)
@@ -192,4 +195,10 @@ public class AjaxResult extends HashMap<String, Object>
     {
         return new AjaxResult(Type.ERROR, msg, data);
     }
+
+    public static AjaxResult parametersMissing()
+    {
+        return new AjaxResult(Type.ERROR, "请求参数缺失", null);
+    }
+
 }

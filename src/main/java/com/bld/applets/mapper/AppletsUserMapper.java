@@ -3,6 +3,7 @@ package com.bld.applets.mapper;
 import java.util.List;
 import com.bld.applets.domain.AppletsUser;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * 用户Mapper接口
@@ -44,6 +45,8 @@ public interface AppletsUserMapper
      */
     public int updateAppletsUser(AppletsUser appletsUser);
 
+    public int updateUserBySql(String sql);
+
     /**
      * 删除用户
      * 
@@ -67,7 +70,7 @@ public interface AppletsUserMapper
      * @return: java.lang.Long
      * @Date: 2021/3/4
      */
-    @Select("SELECT SUM(charge) FROM applets_order where status != 0 and date = CURDATE()")
-    public Long getThisMonthCharge ();
+    @Select("SELECT IFNULL(SUM(charge),0) FROM applets_order where status != 0 and createTime = CURDATE() and user_id = #{userId}")
+    public Long getThisMonthCharge (Long userId);
 
 }
