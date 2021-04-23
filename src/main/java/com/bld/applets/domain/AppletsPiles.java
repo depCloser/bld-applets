@@ -47,10 +47,10 @@ public class AppletsPiles extends BaseEntity
     private String addrDetail;
 
     /** 经度 */
-    private Long longitude;
+    private String longitude;
 
     /** 纬度 */
-    private Long latitude;
+    private String latitude;
 
     /** 属主id */
     private Long userId;
@@ -161,23 +161,23 @@ public class AppletsPiles extends BaseEntity
     {
         return addrDetail;
     }
-    public AppletsPiles setLongitude(Long longitude)
+    public AppletsPiles setLongitude(String longitude)
     {
         this.longitude = longitude;
         return this;
     }
 
-    public Long getLongitude() 
+    public String getLongitude()
     {
         return longitude;
     }
-    public AppletsPiles setLatitude(Long latitude)
+    public AppletsPiles setLatitude(String latitude)
     {
         this.latitude = latitude;
         return this;
     }
 
-    public Long getLatitude() 
+    public String getLatitude()
     {
         return latitude;
     }

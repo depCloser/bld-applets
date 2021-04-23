@@ -1,6 +1,8 @@
 package com.bld.applets.utils;
 
 import com.bld.applets.domain.AppletsPiles;
+import com.bld.applets.domain.DTO.QueryPilesDTO;
+import org.apache.commons.lang3.StringUtils;
 import org.thingsboard.server.common.data.Device;
 
 /**
@@ -25,8 +27,24 @@ public class BeanUtils {
                 .setCode(device.getId().toString());
 
     }
-    
-    
+
+    public static AppletsPiles queryDTO2Piles (QueryPilesDTO queryPilesDTO) {
+        AppletsPiles piles = new AppletsPiles();
+        if (StringUtils.isNotEmpty(queryPilesDTO.getName())) {
+            piles.setName(queryPilesDTO.getName());
+        }
+        if (queryPilesDTO.getStatus() != null) {
+            piles.setStatus(queryPilesDTO.getStatus());
+        }
+        if (queryPilesDTO.getType() != null) {
+            piles.setType(queryPilesDTO.getType());
+        }
+        if (queryPilesDTO.getChargedState() != null) {
+            piles.setChargedState(queryPilesDTO.getChargedState());
+        }
+        return piles;
+
+    }
     
     
     

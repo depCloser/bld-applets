@@ -51,6 +51,11 @@ public class AppletsPowerServiceImpl implements IAppletsPowerService
     }
 
     @Override
+    public List<AppletsPower> selectPowerBySql(String sql) {
+        return appletsPowerMapper.selectPowerBySql(sql);
+    }
+
+    @Override
     public List<AppletsPower> selectTodayPowerList(AppletsPower appletsPower) {
         return null;
     }

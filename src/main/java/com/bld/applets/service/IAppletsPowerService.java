@@ -29,6 +29,8 @@ public interface IAppletsPowerService
      */
     public List<AppletsPower> selectAppletsPowerList(AppletsPower appletsPower);
 
+    public List<AppletsPower> selectPowerBySql(String sql);
+
     public List<AppletsPower> selectTodayPowerList(AppletsPower appletsPower);
 
     /**

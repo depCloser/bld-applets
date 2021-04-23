@@ -31,6 +31,8 @@ public interface AppletsPowerMapper
      */
     public List<AppletsPower> selectAppletsPowerList(AppletsPower appletsPower);
 
+    public List<AppletsPower> selectPowerBySql(String sql);
+
     @Select("select * from applets_power where p_id = #{pId} and date = CURRENT_DATE()")
     public List<AppletsPower> selectTodayPowerList(AppletsPower appletsPower);
 

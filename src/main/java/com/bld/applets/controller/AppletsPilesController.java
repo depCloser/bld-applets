@@ -2,18 +2,20 @@ package com.bld.applets.controller;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
-import com.bld.applets.constants.DeviceAttributeConstants;
 import com.bld.applets.domain.AjaxResult;
 import com.bld.applets.domain.AppletsPower;
 import com.bld.applets.domain.AppletsUser;
+import com.bld.applets.domain.DTO.QueryPilesDTO;
 import com.bld.applets.domain.TableDataInfo;
 import com.bld.applets.service.IAppletsPowerService;
 import com.bld.applets.service.IAppletsUserService;
 import com.bld.applets.utils.BeanUtils;
 import com.bld.applets.utils.CommonUtils;
-import com.bld.applets.utils.ThingsboardApiUtils;
+import com.bld.applets.utils.ServiceUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.gavaghan.geodesy.Ellipsoid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.bld.applets.domain.AppletsPiles;
 import com.bld.applets.service.IAppletsPilesService;
-import org.thingsboard.server.common.data.Device;
-import org.thingsboard.server.common.data.kv.AttributeKvEntry;
 
 /**
  * 充电桩Controller
@@ -45,14 +45,34 @@ public class AppletsPilesController extends BaseController
     private IAppletsUserService userService;
 
     /**
-     * 查询充电桩列表
+     * @Author: tyx
+     * @Description: 查询充电桩列表
+     * @Param: [appletsPiles, sourceJ（客户端经度）, sourceW（客户端纬度）, distance（距离 km）]
+     * @return: com.bld.applets.domain.TableDataInfo
+     * @Date: 2021/4/22
      */
     @GetMapping("/list")
     @ResponseBody
-    public TableDataInfo list(AppletsPiles appletsPiles)
-    {
+    public TableDataInfo list(QueryPilesDTO queryPilesDTO) {
         startPage();
-        List<AppletsPiles> list = appletsPilesService.selectAppletsPilesList(appletsPiles.setUserId(CommonUtils.getUserId()));
+        AppletsPiles piles = BeanUtils.queryDTO2Piles(queryPilesDTO);
+        if (queryPilesDTO.getUserId() == null) {
+            piles.setUserId(CommonUtils.getUserId());
+        }
+        List<AppletsPiles> list = appletsPilesService.selectAppletsPilesList(piles);
+        Double distance = queryPilesDTO.getDistance();
+        String sourceJ = queryPilesDTO.getSourceJ();
+        String sourceW = queryPilesDTO.getSourceW();
+        // 距离筛选
+        if (distance != null && distance > 0 && StringUtils.isNotEmpty(sourceJ) && StringUtils.isNotEmpty(sourceW)) {
+            list = list.stream().filter(e -> {
+                double temp = ServiceUtil.getDistance(sourceJ, sourceW, e.getLongitude(), e.getLatitude(), Ellipsoid.WGS84);
+                if ((temp / 1000) <= distance) {
+                    return true;
+                }
+                return false;
+            }).collect(Collectors.toList());
+        }
         return getDataTable(list);
     }
 

@@ -32,6 +32,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectAppletsPowerVo"/>
         where id = #{id}
     </select>
+
+    <select id="selectPowerBySql" parameterType="string" resultMap="AppletsPowerResult">
+        <include refid="selectAppletsPowerVo"/>
+        where ${sql}
+    </select>
         
     <insert id="insertAppletsPower" parameterType="AppletsPower">
         insert into applets_power
